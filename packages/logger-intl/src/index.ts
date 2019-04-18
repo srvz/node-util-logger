@@ -1,4 +1,41 @@
-export default interface Logger {
-  access (data?: Record<string, any>): any
-  error (error: Error, data?: Record<string, any>): any
+
+interface Loggers { accessLog: (res: any) => any, errorLog: (res: any) => any }
+
+export default abstract class {
+  private colors: any
+
+  private loggers: Loggers
+
+  constructor (public logPath: string, public logType: string, public isLocal: boolean = false) {
+    if (isLocal) {
+      this.colors = require('colors')
+    }
+
+    this.loggers = this.buildLogger(logPath, logType)
+  }
+
+  access (data?: Record<string, any>) {
+    if (this.isLocal) {
+      console.log(this.colors.green(data))
+    }
+    this.loggers.accessLog(data)
+  }
+
+  error (error: Error, data?: Record<string, any>) {
+    const err = {
+      err_msg: error.message,
+      err_name: error.name,
+      err_stack: error.stack,
+    }
+
+    const results = { ...err, ...data }
+
+    // 添加本地环境的colors输出
+    if (this.isLocal) {
+      console.error(this.colors.red(results))
+    }
+    this.loggers.errorLog(results)
+  }
+
+  abstract buildLogger (logPath: string, logType: string): Loggers
 }
