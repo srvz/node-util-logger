@@ -9,7 +9,7 @@ export interface LoggerIntl {
   cache?: Cache<Loggers>
   access: (data?: Record<string, any>) => void
   error: (data?: Record<string, any>) => void
-  buildLogger: (logPath: string, logType: string) => Loggers
+  buildLogger: (logType: string) => Loggers
 }
 
 export default abstract class Logger implements LoggerIntl {
