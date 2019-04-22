@@ -1,3 +1,4 @@
+import Cache from '@blued-core/cache-intl'
 
 interface Loggers { accessLog: (res: any) => any, errorLog: (res: any) => any }
 
@@ -5,6 +6,7 @@ export interface LoggerIntl {
   logPath: string
   logType: string
   isLocal?: boolean
+  cache?: Cache
   access: (data?: Record<string, any>) => void
   error: (data?: Record<string, any>) => void
   buildLogger: (logPath: string, logType: string) => Loggers
@@ -15,7 +17,7 @@ export default abstract class Logger implements LoggerIntl {
 
   private loggers: Loggers
 
-  constructor (public logPath: string, public logType: string, public isLocal: boolean = false) {
+  constructor (public logPath: string, public logType: string, public cache: Cache, public isLocal: boolean = false) {
     if (isLocal) {
       this.colors = require('colors')
     }
