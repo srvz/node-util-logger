@@ -10,12 +10,13 @@ type DailyRotateFile = typeof winston.transports & {
 }
 
 export default class extends Logger {
-  buildLogger (logPath: string, logType: string) {
+  buildLogger (logType: string) {
+    if (this.cache.has(logType)) return this.cache.get(logType)
+
+    const { logPath } = this
     if (!fs.existsSync(logPath)) {
       mkdirp.sync(logPath)
     }
-
-    if (this.cache.has(logType)) return this.cache.get(logType)
 
     const accessLog = winston.createLogger({
       transports: [
