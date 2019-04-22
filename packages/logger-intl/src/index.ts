@@ -3,8 +3,8 @@ import Cache from '@blued-core/cache-intl'
 export interface Loggers { accessLog: (res: any) => any, errorLog: (res: any) => any }
 
 export interface LoggerIntl {
-  logPath: string
   logType: string
+  logPath: string
   isLocal?: boolean
   cache?: Cache<Loggers>
   access: (data?: Record<string, any>) => void
@@ -13,16 +13,20 @@ export interface LoggerIntl {
 }
 
 export default abstract class Logger implements LoggerIntl {
+  public logType: string
+
   private colors: any
 
   private loggers: Loggers
 
-  constructor (public logPath: string, public logType: string, public cache: Cache<Loggers>, public isLocal: boolean = false) {
+  constructor (
+    public logPath: string,
+    public cache: Cache<Loggers>,
+    public isLocal: boolean = false
+  ) {
     if (isLocal) {
       this.colors = require('colors')
     }
-
-    this.loggers = this.buildLogger(logPath, logType)
   }
 
   access (data?: Record<string, any>) {
@@ -48,5 +52,5 @@ export default abstract class Logger implements LoggerIntl {
     this.loggers.errorLog(results)
   }
 
-  abstract buildLogger (logPath: string, logType: string): Loggers
+  abstract buildLogger (logType: string): Loggers
 }
