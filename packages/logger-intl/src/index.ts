@@ -6,7 +6,7 @@ export interface LoggerIntl {
   logPath: string
   logType: string
   isLocal?: boolean
-  cache?: Cache
+  cache?: Cache<Loggers>
   access: (data?: Record<string, any>) => void
   error: (data?: Record<string, any>) => void
   buildLogger: (logPath: string, logType: string) => Loggers
