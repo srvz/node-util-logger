@@ -1,6 +1,6 @@
 import Cache from '@blued-core/cache-intl'
 
-interface Loggers { accessLog: (res: any) => any, errorLog: (res: any) => any }
+export interface Loggers { accessLog: (res: any) => any, errorLog: (res: any) => any }
 
 export interface LoggerIntl {
   logPath: string
