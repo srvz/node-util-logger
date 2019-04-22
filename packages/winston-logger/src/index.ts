@@ -5,12 +5,11 @@ import mkdirp from 'mkdirp'
 import winston from 'winston'
 import 'winston-daily-rotate-file'
 
-const loggerCollection: Record<string, any> = {}
 type DailyRotateFile = typeof winston.transports & {
   DailyRotateFile: any
 }
 
-export default class T extends Logger {
+export default class extends Logger {
   buildLogger (logPath: string, logType: string) {
     if (!fs.existsSync(logPath)) {
       mkdirp.sync(logPath)
@@ -45,6 +44,6 @@ export default class T extends Logger {
       errorLog: errorLog.error.bind(errorLog),
     })
 
-    return loggerCollection[logType]
+    return this.cache.get(logType)
   }
 }
