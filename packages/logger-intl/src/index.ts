@@ -1,7 +1,16 @@
 
 interface Loggers { accessLog: (res: any) => any, errorLog: (res: any) => any }
 
-export default abstract class {
+export interface LoggerIntl {
+  logPath: string
+  logType: string
+  isLocal?: boolean
+  access: (data?: Record<string, any>) => void
+  error: (data?: Record<string, any>) => void
+  buildLogger: (logPath: string, logType: string) => Loggers
+}
+
+export default abstract class Logger implements LoggerIntl {
   private colors: any
 
   private loggers: Loggers
