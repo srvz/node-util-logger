@@ -17,7 +17,7 @@ export default abstract class Logger implements LoggerIntl {
 
   private loggers: Loggers
 
-  constructor (public logPath: string, public logType: string, public cache: Cache, public isLocal: boolean = false) {
+  constructor (public logPath: string, public logType: string, public cache: Cache<Loggers>, public isLocal: boolean = false) {
     if (isLocal) {
       this.colors = require('colors')
     }
