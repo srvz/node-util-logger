@@ -13,7 +13,7 @@ export interface LoggerIntl {
 
 export interface LoggerClient {
   access: (data?: Record<string, any>) => void
-  error: (data?: Record<string, any>) => void
+  error: (error: Error, data?: Record<string, any>) => void
 }
 
 export default abstract class Logger implements LoggerIntl {
