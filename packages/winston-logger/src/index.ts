@@ -16,7 +16,7 @@ export default class T extends Logger {
       mkdirp.sync(logPath)
     }
 
-    if (loggerCollection[logType]) return loggerCollection[logType]
+    if (this.cache.has(logType)) return this.cache.get(logType)
 
     const accessLog = winston.createLogger({
       transports: [
@@ -40,10 +40,10 @@ export default class T extends Logger {
       ],
     })
 
-    loggerCollection[logType] = {
+    this.cache.set(logType, {
       accessLog: accessLog.info.bind(accessLog),
       errorLog: errorLog.error.bind(errorLog),
-    }
+    })
 
     return loggerCollection[logType]
   }
