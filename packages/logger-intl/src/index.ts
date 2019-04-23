@@ -33,11 +33,11 @@ export default abstract class Logger implements LoggerIntl {
 
   getLogger (logType: string) {
     const logger = this.buildLogger(logType)
-    const { colors } = this
+    const { colors, isLocal } = this
 
     return {
       access (data?: Record<string, any>) {
-        if (this.isLocal) {
+        if (isLocal) {
           console.log(colors.green(data))
         }
         logger.accessLog(data)
@@ -52,7 +52,7 @@ export default abstract class Logger implements LoggerIntl {
         const results = { ...err, ...data }
 
         // 添加本地环境的colors输出
-        if (this.isLocal) {
+        if (isLocal) {
           console.error(colors.red(results))
         }
         logger.errorLog(results)
