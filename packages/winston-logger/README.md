@@ -19,7 +19,7 @@ logger.error(new Error('test error'), { msg: 'test' })
 ### constructor
 
 Argument|Type|Required|Desc
-:--|:--
+:--|:--|:--|:--
 `logPath`|`string`|✅|日志输出的路径
 `logType`|`string`|✅|日志的标识符`YYYY-MM-DD-%logType%.<access|error>.log`
 `isLocal`|`string`|❌|是否为本地环境，开启 terminal 输出，默认为`false`
@@ -27,13 +27,13 @@ Argument|Type|Required|Desc
 ### access
 
 Argument|Type|Required|Desc
-:--|:--
+:--|:--|:--|:--
 `data`|`Record<string, any>`|❌|日志的输出内容
 
 ### error
 
 Argument|Type|Required|Desc
-:--|:--
+:--|:--|:--|:--
 `error`|`Error`|✅|日志的输出内容
 `data`|`Record<string, any>`|❌|日志的输出内容
 
