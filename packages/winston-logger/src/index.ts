@@ -23,6 +23,7 @@ export default class extends Logger {
         new (winston.transports as DailyRotateFile).DailyRotateFile({
           filename: path.resolve(logPath, `./%DATE%-${logType}.access.log`),
           datePattern: `YYYY-MM-DD-HH`,
+          zippedArchive: true,
           level: 'info',
         }),
       ],
@@ -33,6 +34,7 @@ export default class extends Logger {
         new (winston.transports as DailyRotateFile).DailyRotateFile({
           filename: path.resolve(logPath, `./%DATE%-${logType}.error.log`),
           datePattern: `YYYY-MM-DD-HH`,
+          zippedArchive: true,
           level: 'error',
         }),
       ],
