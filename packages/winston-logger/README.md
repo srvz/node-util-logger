@@ -22,7 +22,7 @@ Argument|Type|Required|Desc
 :--|:--|:--|:--
 `logPath`|`string`|✅|日志输出的路径
 `logType`|`string`|✅|日志的标识符`YYYY-MM-DD-%logType%.<access|error>.log`
-`isLocal`|`boolean`|❌|是否为本地环境，开启控制台输出，默认为`false`
+`isLocal`|`string`|❌|是否为本地环境，开启 terminal 输出，默认为`false`
 
 ### access
 
