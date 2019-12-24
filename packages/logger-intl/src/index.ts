@@ -50,6 +50,7 @@ export default abstract class Logger implements LoggerIntl {
           err_msg: error.message,
           err_name: error.name,
           err_stack: error.stack,
+          error,
         }
 
         const results = { ...err, ...data, ms_timestamp: Date.now() }
